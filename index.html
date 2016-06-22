@@ -3,8 +3,8 @@
 <head>
 <title>Page Title</title>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
- <link href="http://vjs.zencdn.net/5.10.4/video-js.css" rel="stylesheet">
- <script src="http://vjs.zencdn.net/5.10.4/video.js"></script>
+ 	<link rel="stylesheet" type="text/css" media="screen" href="css/captions.css"/>
+
  <script src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
  <script src="index.js"></script>
@@ -14,19 +14,48 @@
 
  <!-- this is a comment -->
 
+ <video controls autobuffer id="videoTest" width="1010" height="464" style="width: 100%; height: auto !important;">
+   <source src="video/arduino.m4v" type="video/mp4" />
+   <source src="video/arduino.webm" type="video/webm" />
+   <source src="video/arduino.ogv" type="video/ogg" />
 
-<video class="video-js vjs-default-skin"
-controls preload="metadata" width="640" height="264"
-data-setup='{"example_option":true}'>
-<source src="http://video-js.zencoder.com/oceans-clip.mp4" type="video/mp4" />
- <source src="http://video-js.zencoder.com/oceans-clip.webm" type="video/webm" />
- <source src="http://video-js.zencoder.com/oceans-clip.ogv" type="video/ogg" />
+   <!-- Subtitles for this video -->
+   <track kind="subtitles" src="video/arduino-en.vtt" type="text/vtt" srclang="en" label="English Subtitles" default />
+   <track kind="subtitles" src="video/arduino-de.vtt" type="text/vtt" srclang="de" label="German Subtitles" />
+   <track kind="subtitles" src="video/arduino-ja.vtt" type="text/vtt" srclang="ja" label="Japanese Subtitles" />
 
- <track kind="captions" src="http://example.com/path/to/captions.vtt" srclang="en" label="English" default>
+   <!-- TTML Example (not for this video) -->
+   <!-- I haven't included this file in the repo because it's not publically licenced. Before I do a proper release I'll find a CC / FOSS TTML file. -->
+   <track kind="subtitles" src="video/ttml-govt.xml" type="application/ttml+xml" srclang="en" label="TTML Example" />
 
-</video>
+   <!-- LRC Example (not for this video) -->
+   <!-- Adapted from: http://www.stepmania.com/wiki/Song_Lyrics_-_LRC_Format -->
+   <track kind="descriptions" src="video/example.lrc" type="text/lrc" srclang="en" label="LRC Example" default />
 
+   <!-- WebVTT Testing & Examples -->
+   <track kind="captions" src="video/acid.vtt" type="text/vtt" srclang="en" label="WebVTT Acid Test" />
+   <track kind="captions" src="video/example.vtt" type="text/vtt" srclang="en" label="WHATWG's WebVTT Example"  />
+ </video>
 
+ <script type="text/javascript" src="js/captionator.js"></script>
+
+  <!-- Example Usage -->
+  <script type="text/javascript" src="js/captionator-example-api.js"></script>
+  <script type="text/javascript">
+    window.addEventListener("load",function() {
+      captionator.captionify(null,null,{
+        debugMode: !!window.location.search.match(/debug/i),
+        sizeCuesByTextBoundingBox: !!window.location.search.match(/boundingBox/i),
+        enableHighResolution: !!window.location.search.match(/highres/i),
+      });
+
+      var videoObject = document.getElementsByTagName("video")[0];
+      videoObject.volume = 0;
+      document.body.appendChild(generateMediaControls(videoObject));
+    },false);
+  </script>
+
+<!--
   <div class="row">
          <div class="col s12 m7">
            <div class="card">
@@ -48,7 +77,7 @@ data-setup='{"example_option":true}'>
              </div>
            </div>
          </div>
-       </div>
+       </div> -->
 
 
 
