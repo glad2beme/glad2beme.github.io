@@ -1,0 +1,1130 @@
+town website schedual/tutorial learning This code was taken from the town website. It
+1) contains a table of the daily programs with a number  of fields Day,
+date, time, program, length, next air date, watching,
+2) uses a calendar interface
+3) controls forward and backward month tool
+4) also controls day of the month
+5) returns the a new  page based on the calendar interface tool
+selections on that webpage.
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+
+<head>
+  <link href="/stylesheets/psg.css?1465391336" media="screen" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/prototype.js?1465391336" type="text/javascript"></script>
+  <script src="/javascripts/jquery.js?1465391336" type="text/javascript"></script>
+  <script src="/javascripts/external_schedule_populate_vod_links.js?1465391336" type="text/javascript"></script>
+  <script src="/javascripts/facebox.js?1465391336" type="text/javascript"></script>
+  <link href="/stylesheets/facebox.css?1465391336" media="screen" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript">
+    var $j = jQuery.noConflict();
+  </script>
+
+  <title>Schedule</title>
+</head>
+<body>
+  <div id="header">
+    <div>Channel: Channel 1</div>
+  </div>  
+  <div id="maincanvas">
+    <div class="needsHeightSpecifiedForIE">
+  <div class="sidebar" id="wideSidebar">
+  <a class="sidebar-title" onclick="">Quick Search</a><div class=" sidebar-panel always-open" id="contentSidebarQuickSearch" style="text-align:right; padding:10px;">
+    <form action="/external_schedule/search/1" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=" /></div>
+      <input id="keywords" name="keywords" style="width: 110px; margin-top: 10px;" type="text" />
+      <input id="schedule_date" name="schedule_date" type="hidden" value="Fri Jul 01 00:00:00 -0400 2016" />
+      <input name="commit" type="submit" value="Search" />
+    </form>
+  </div>
+  
+  <a class="sidebar-title" onclick="">Calendar</a><div class=" sidebar-panel always-open" id="contentSidebarCalendar">
+
+
+
+
+
+<div id="calendar">
+  <table cellspacing="0">
+    <tr>
+
+
+      <th id="prevMonthNavigator" class="control">
+        <a href="#" onclick="new Ajax.Updater('calendar', '/external_schedule/calendar_view_prev_month/1?current_day=1467345600', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">&lt;&lt;</a>
+      </th>
+      <th class="month" colspan="5">July&nbsp;2016&nbsp;</th>
+      <th id="nextMonthNavigator" class="control">
+        <a href="#" onclick="new Ajax.Updater('calendar', '/external_schedule/calendar_view_next_month/1?current_day=1467345600', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">&gt;&gt;</a>
+      </th>
+    </tr>
+    <tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr>
+
+    <tr>
+ 
+      <th>&nbsp;</th>
+ 
+      <th>&nbsp;</th>
+ 
+      <th>&nbsp;</th>
+ 
+      <th>&nbsp;</th>
+ 
+      <th>&nbsp;</th>
+ 			      			             
+      <td id="1day" class="green" 
+
+      style="border: 2px solid #aaaaaa;"
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=1&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">1</a>
+      </td>            
+ 			      			             
+      <td id="2day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=2&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">2</a>
+      </td>            
+
+    </tr>
+    <tr>			    
+ 			      			             
+      <td id="3day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=3&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">3</a>
+      </td>            
+ 			      			             
+      <td id="4day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=4&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">4</a>
+      </td>            
+ 			      			             
+      <td id="5day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=5&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">5</a>
+      </td>            
+ 			      			             
+      <td id="6day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=6&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">6</a>
+      </td>            
+ 			      			             
+      <td id="7day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=7&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">7</a>
+      </td>            
+ 			      			             
+      <td id="8day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=8&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">8</a>
+      </td>            
+ 			      			             
+      <td id="9day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=9&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">9</a>
+      </td>            
+
+    </tr>
+    <tr>			    
+ 			      			             
+      <td id="10day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=10&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">10</a>
+      </td>            
+ 			      			             
+      <td id="11day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=11&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">11</a>
+      </td>            
+ 			      			             
+      <td id="12day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=12&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">12</a>
+      </td>            
+ 			      			             
+      <td id="13day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=13&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">13</a>
+      </td>            
+ 			      			             
+      <td id="14day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=14&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">14</a>
+      </td>            
+ 			      			             
+      <td id="15day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=15&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">15</a>
+      </td>            
+ 			      			             
+      <td id="16day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=16&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">16</a>
+      </td>            
+
+    </tr>
+    <tr>			    
+ 			      			             
+      <td id="17day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=17&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">17</a>
+      </td>            
+ 			      			             
+      <td id="18day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=18&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">18</a>
+      </td>            
+ 			      			             
+      <td id="19day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=19&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">19</a>
+      </td>            
+ 			      			             
+      <td id="20day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=20&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">20</a>
+      </td>            
+ 			      			             
+      <td id="21day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=21&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">21</a>
+      </td>            
+ 			      			             
+      <td id="22day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=22&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">22</a>
+      </td>            
+ 			      			             
+      <td id="23day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=23&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">23</a>
+      </td>            
+
+    </tr>
+    <tr>			    
+ 			      			             
+      <td id="24day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=24&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">24</a>
+      </td>            
+ 			      			             
+      <td id="25day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=25&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">25</a>
+      </td>            
+ 			      			             
+      <td id="26day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=26&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">26</a>
+      </td>            
+ 			      			             
+      <td id="27day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=27&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">27</a>
+      </td>            
+ 			      			             
+      <td id="28day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=28&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">28</a>
+      </td>            
+ 			      			             
+      <td id="29day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=29&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">29</a>
+      </td>            
+ 			      			             
+      <td id="30day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=30&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">30</a>
+      </td>            
+
+    </tr>
+    <tr>			    
+ 			      			             
+      <td id="31day" class="foo" 
+>
+
+        <a href="#" onclick="new Ajax.Request('/external_schedule/select_calendar_view_day/1?day=31&amp;month=7&amp;year=2016', {asynchronous:true, evalScripts:true, method:'get', parameters:'authenticity_token=' + encodeURIComponent('GW64UG8maAanklUYtmO7sKsW2ac3iIut/ziFudCUfmI=')}); return false;">31</a>
+      </td>            
+ 	 			
+    </tr>
+  </table>
+</div>
+</div>
+</div>
+  
+
+
+<div id="simple_schedule" style="height:1%"> <!-- Prevents program guide from dropping below the sidebar in IE -->
+  <span style="font-weight: bolder;">Friday 07/01/2016</span>
+  <table class="bigtable" style="clear: none; width: auto;">
+    <tr>
+
+
+      <th>Time</th>
+      <th>Program</th>
+      <th>Duration</th>
+      <th>Next Air Date</th>
+
+      <th>Watch</th>
+
+    </tr>
+
+    <tr>
+
+  <td>11:00 PM</td>
+
+  <td>BOE Meeting 6-2216: Workshop/Regular Meeting</td>
+
+  <td>02:03:22</td>
+  <td>Fri Jul 01 11:00:00 AM EDT 2016</td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177086" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:03 AM</td>
+
+  <td>School Time: West Milford District Arts Festival III</td>
+
+  <td>00:47:31</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177379" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:50 AM</td>
+
+  <td>Our Community: Korean War The Forgotten War</td>
+
+  <td>01:10:00</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177380" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>03:00 AM</td>
+
+  <td>School Time: May 12 WMHS Choir</td>
+
+  <td>00:45:43</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177381" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>03:46 AM</td>
+
+  <td>Chasing the Dragon CENSORED: Chasing the Dragon CENSORED</td>
+
+  <td>00:49:08</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177382" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>04:35 AM</td>
+
+  <td>Barron Arts Center Presents: All Seasons Chamber Player</td>
+
+  <td>01:22:02</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177383" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>06:00 AM</td>
+
+  <td>seniorcize 0411-CL-9 SD</td>
+
+  <td>00:28:47</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177284" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>07:00 AM</td>
+
+  <td>TCM 6-22-16: Council Regular Meeting 6-22-16</td>
+
+  <td>02:12:30</td>
+  <td>Fri Jul 01 07:00:00 PM EDT 2016</td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_176301" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>09:12 AM</td>
+
+  <td>RUN. HIDE. FIGHT: Surviving an Active Shooter Event </td>
+
+  <td>00:05:56</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177512" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>09:18 AM</td>
+
+  <td>Science of Innovation: Micro-Fabrication for Cochlear Implants</td>
+
+  <td>00:06:04</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177513" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>09:24 AM</td>
+
+  <td>LIGO Detects Gravitational Waves</td>
+
+  <td>00:05:27</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177514" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>09:30 AM</td>
+
+  <td>Classroom Close-up NJ: CCU 20-16</td>
+
+  <td>00:27:48</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177285" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>09:57 AM</td>
+
+  <td>Our Community: West Milford Fire Dept Visits a Burn Building</td>
+
+  <td>00:01:57</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177516" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>10:00 AM</td>
+
+  <td>NASA X: NASA X - 3</td>
+
+  <td>00:24:32</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177295" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>10:24 AM</td>
+
+  <td>Science of Innovation: Science of Innovation: 3-D Printing</td>
+
+  <td>00:05:08</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177515" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>11:00 AM</td>
+
+  <td>BOE Meeting 6-2216: Workshop/Regular Meeting</td>
+
+  <td>02:03:22</td>
+  <td>Fri Jul 01 11:00:00 PM EDT 2016</td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_176992" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:05 PM</td>
+
+  <td>Science of Innovation: Science of Innovation: Self-Driving Cars</td>
+
+  <td>00:05:55</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177518" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:11 PM</td>
+
+  <td>When Nature Strikes - Science of Natural Hazards: Hurricanes</td>
+
+  <td>00:05:43</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177519" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:16 PM</td>
+
+  <td>This Is Access</td>
+
+  <td>00:07:19</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177520" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:24 PM</td>
+
+  <td>PR Common Soldier DM BN 5-28-15</td>
+
+  <td>00:05:36</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177521" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:30 PM</td>
+
+  <td>Student Filims: War and Remembrance</td>
+
+  <td>00:08:37</td>
+  <td>Fri Jul 01 06:20:26 PM EDT 2016</td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177301" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:38 PM</td>
+
+  <td>Student Filims: Highlander Day 2016</td>
+
+  <td>00:03:19</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177302" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:42 PM</td>
+
+  <td>Our Community: Around Town Megan Hogan Interview</td>
+
+  <td>00:14:07</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177303" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>01:56 PM</td>
+
+  <td>NFPA Grilling Fire Safety Tips</td>
+
+  <td>00:03:27</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177522" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>02:00 PM</td>
+
+  <td>Beekeeping Takes Flight : Beekeeping at Sea-Tac Airport</td>
+
+  <td>00:26:00</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177537" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>02:26 PM</td>
+
+  <td>Bear Safety Video Camping Hiking-(1)</td>
+
+  <td>00:03:20</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177538" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>03:00 PM</td>
+
+  <td>Lucys BBWP Ocean (1)</td>
+
+  <td>00:29:55</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177308" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>03:30 PM</td>
+
+  <td>ABC Catalyst : Low Carb Diet - Fat or Fiction</td>
+
+  <td>00:29:20</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177309" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>04:00 PM</td>
+
+  <td>In The Fight: 103-Today's US Army</td>
+
+  <td>00:28:30</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177319" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>04:30 PM</td>
+
+  <td>Aging Insights : 50-Medicare Open Enrollment &amp; Senior Medicare</td>
+
+  <td>00:27:28</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177320" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>04:57 PM</td>
+
+  <td>Health- Just Walk ND BN </td>
+
+  <td>00:01:00</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177525" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>04:58 PM</td>
+
+  <td>Skylands Manor</td>
+
+  <td>00:01:15</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177526" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>05:00 PM</td>
+
+  <td>Cooking Healthy  : Chewy Granola Bars and Carrot</td>
+
+  <td>00:25:18</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177325" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>05:30 PM</td>
+
+  <td>TED Talks: Linus Torvalds-Mind Behind Linux</td>
+
+  <td>00:21:34</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177336" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>05:51 PM</td>
+
+  <td>Continue the Conversation - Be a Face</td>
+
+  <td>00:06:22</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177529" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>06:00 PM</td>
+
+  <td>Our Community: An Afternoon with Emma Brooke</td>
+
+  <td>00:20:15</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177349" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>06:20 PM</td>
+
+  <td>Student Filims: War and Remembrance</td>
+
+  <td>00:08:37</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177350" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>07:00 PM</td>
+
+  <td>TCM 6-22-16: Council Regular Meeting 6-22-16</td>
+
+  <td>02:12:30</td>
+  <td>Sat Jul 02 11:00:00 AM EDT 2016</td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_176332" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>09:12 PM</td>
+
+  <td>Master Gardeners Butterfly Show 10 min. </td>
+
+  <td>00:10:05</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177531" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>09:22 PM</td>
+
+  <td>Whats Bugging You? Prevent Ticks 7 min.</td>
+
+  <td>00:07:01</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177532" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>09:30 PM</td>
+
+  <td>Environmental Awakening: 14-Day 13 of the Bay Circuit Trail hike</td>
+
+  <td>00:25:21</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177356" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>09:55 PM</td>
+
+  <td>Researchers develop a wearable robotic arm!</td>
+
+  <td>00:04:09</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177533" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>10:00 PM</td>
+
+  <td>NASA 360 &quot;Original Series&quot;: NASA 360 - 2</td>
+
+  <td>00:24:34</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177357" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>10:24 PM</td>
+
+  <td>Science Behind the News: nsf news tornadoes</td>
+
+  <td>00:04:09</td>
+  <td></td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177534" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+<tr>
+
+  <td>11:00 PM</td>
+
+  <td>BOE Meeting 6-2216: Workshop/Regular Meeting</td>
+
+  <td>02:03:22</td>
+  <td>Mon Jul 04 11:00:00 AM EDT 2016</td>
+
+  <td width="60px">
+    
+      
+        <div id="watch_177088" class="watch"></div>
+      
+    
+  </td>
+
+</tr>
+
+
+  </table>
+</div>
+
+
+
+
+
+
+
+  <br style="clear: both" />
+</div>
+
+  </div>
+</body>
+
+</html>
